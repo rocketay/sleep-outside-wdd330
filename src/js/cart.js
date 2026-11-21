@@ -1,4 +1,7 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, loadHeaderFooter } from './utils.mjs';
+
+// load the shared header and footer partials into the page
+loadHeaderFooter();
 
 function renderCartContents() {
   // if nothing is stored yet, getLocalStorage returns null, so fall back to an empty array

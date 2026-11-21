@@ -1,14 +1,11 @@
 import { renderListWithTemplate } from './utils.mjs';
 
-// only these products have detail pages, so only these are listed
-const LISTED_PRODUCT_IDS = ['880RR', '985RF', '985PR', '344YJ'];
-
 // returns the HTML string for one product card
 function productCardTemplate(product) {
   return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
+    <a href="/product_pages/?product=${product.Id}">
       <img
-        src="${product.Image}"
+        src="${product.Images.PrimaryMedium}"
         alt="${product.Name}"
       />
       <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -26,13 +23,9 @@ export default class ProductList {
   }
 
   async init() {
-    // get the list of products from the data source
-    const list = await this.dataSource.getData();
-    // keep only the products that have detail pages
-    const listedProducts = list.filter((product) =>
-      LISTED_PRODUCT_IDS.includes(product.Id),
-    );
-    this.renderList(listedProducts);
+    // get the products of this category from the API
+    const list = await this.dataSource.getData(this.category);
+    this.renderList(list);
   }
 
   renderList(list) {
