@@ -39,6 +39,9 @@ export default class ProductDetails {
   renderProductDetails() {
     const product = this.product;
 
+    // the API can return products without colors, so use a safe fallback
+    const colorName = product.Colors?.[0]?.ColorName || '';
+
     // update the page title with the product name
     document.title = `Sleep Outside | ${product.Name}`;
 
@@ -49,13 +52,13 @@ export default class ProductDetails {
 
       <img
         class="divider"
-        src="${product.Image}"
+        src="${product.Images.PrimaryLarge}"
         alt="${product.NameWithoutBrand}"
       />
 
       <p class="product-card__price">$${product.FinalPrice}</p>
 
-      <p class="product__color">${product.Colors[0].ColorName}</p>
+      <p class="product__color">${colorName}</p>
 
       <p class="product__description">${product.DescriptionHtmlSimple}</p>
 

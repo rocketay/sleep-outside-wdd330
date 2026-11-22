@@ -7,7 +7,9 @@ loadHeaderFooter();
 
 // the product id comes from the URL, for example ?product=880RR
 const productId = getParam('product');
-const dataSource = new ProductData('tents');
+
+// the category is no longer needed: the API finds the product by its id
+const dataSource = new ProductData();
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
